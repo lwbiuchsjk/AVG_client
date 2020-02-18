@@ -1,24 +1,94 @@
-# client
+# 前端程序
 
-## Project setup
+演示用的前端程序，是一个通过Vue CLI构建的单页应用，其在开发环境中工作在8080端口，向server工作的3000端口请求数据。
+
+## 安装依赖
+
+前端程序主要使用Vue.js框架，在开发前，需要安装包依赖，请将终端的工作目录切换到client下，并运行如下命令
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+运行该命令后，npm会自动解析`package.json`文件的包依赖，进行自动将各个依赖的包安装在`node_modules`下。
+
+在安装完成后，npm还会将安装记录保存在`package-lock.json`中。所以，我们可以通过如下命令来实现npm包的直接安装，不需要再对依赖进行解析，理论上会比`npm install`命令安装更快
+
+```
+npm ci
+```
+
+因此，只要存在`package-lock.json`文件时，我们都可以使用`npm ci`命令来替代`npm install`
+
+## Vue CLI
+
+Vue CLI是Vue.js的一个构建器，主要用于实现脚手架的搭建，并且提供了一个GUI的状态监视、管理工具。
+
+Vue CLI相关说明可以参考其官网
+[Vue CLI 官网](https://cli.vuejs.org/zh/)
+
+### Vue CLI的安装
+
+```
+npm install -g @vue/cli
+```
+
+### Vue CLI GUI的启动
+
+```
+vue ui
+```
+
+因为大部分的操作都可以通过命令来实现
+
+所以一般我们在使用的时候，不一定需要使用Vue CLI提供的GUI来操作
+
+## 相关命令
+
+### 启动前端开发服务器
+
+该命令会启动前端开发服务器，并支持热更新，在进行前端开发时，请运行该命令
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译静态文件
+
+该命令会将前端程序编译成前端静态文件，用于浏览器显示
+
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 目录结构
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### dist
+
+前端静态文件默认生成目录，目前我已经修改为自动输出到server\public中，因此该目录与项目已无关，可以自行删除。若静态文件输出异常，可以手动将该目录下所有文件拷贝至`server\public`中
+
+### node_modules
+
+开发工具链包依赖安装目录，该目录下的文件是前端程序开发中依赖的包和前端程序运行时使用的包，运行`npm install`或`npm ci`命令会生成该目录
+
+在运行`npm build`命令时，会自动将相关的包打包到静态文件中
+
+该目录中的文件与版本控制、部署无关
+
+在进行版本控制的提交时，会自动忽略该目录
+
+### public
+
+该目录下的内容是前端程序用的静态资源文件
+
+### src
+
+该目录中的内容是前端程序的核心内容
+
+`main.js`是前端程序的核心入口，如果不需要添加额外组件，一般不需要修改
+
+`App.vue`是前端程序的Vue.js主模板，各个子页面或页面中的元素可以理解为该模板中的组件
+
+`assets`目录是前端程序要用的资源文件
+
+`components`中均是前端程序的Vue.js组件
