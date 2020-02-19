@@ -7,6 +7,13 @@
     <div class="options">
       <div class="option" v-for="op in options" v-bind:key="op.data" v-bind:data-index="op.data" @click="next">{{ op.text }}</div>
     </div>
+    <div class = "input">
+      <p>{{input}}</p>
+      <input button v-model="input">
+    </div>
+    <div>
+      <button v-bind="isButtonDisabled">Button</button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +36,7 @@ export default {
   // 在本页面中所有要使用到的数据
   data () {
     return {
-      DramaContent: '这是一堆脚本文字，用于演示数据的绑定',
+      DramaContent: '请回答下列问题',
       options: [  // 操作选项
         {
           text: '选项一',  // 用于显示的文字
@@ -44,7 +51,8 @@ export default {
           text: '选项四',
           data: '4'
         }
-      ]
+      ],
+      input: 'hello'
     }
   },
   // 在本页面中所有要用到的方法
