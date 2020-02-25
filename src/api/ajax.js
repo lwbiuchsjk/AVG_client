@@ -32,3 +32,20 @@ export function GetNextMove (index) {
     }
   })
 }
+
+/**
+ * 将选择的答案发送给服务器
+ *
+ * @export
+ * @param {*} anwser 发送的答案
+ */
+export function SendAnwser (hero, timeline) {
+  return request({
+    url: '/get-anwser',
+    method: 'get',
+    params: {
+      hero: hero,
+      timeline: timeline
+    }
+  })
+}
