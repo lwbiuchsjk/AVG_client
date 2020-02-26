@@ -2,7 +2,6 @@
 <template>
   <div class="container">
     <div class="drama">{{ DramaContent }}</div>
-    <!--
     <div class="options">
       <div class="option" v-for="op in options" v-bind:key="op.data" v-bind:data-index="op.data" @click="next">{{ op.text }}</div>
     </div>
@@ -16,17 +15,16 @@
         <option v-for="send in sendList" name="selectText" :key="send.id" :value='send.text'>{{ send.text }}</option>
       </select>
     </div>
-    -->
     <div id="hero_anwser" v-for="(doc_item, index) in docName" :key="index">
       <tr style="text-align:center">
         <span style="width:900px;float:left;text-align:right">{{doc_item.text}}</span>
-        <el-select select="1" v-model="heroAnswer[index].hero" style="width:100px;float:left">
+        <el-select select="1" v-model="docName[index].hero" style="width:100px;float:left">
           <el-option disabled value>请选择对象</el-option>
           <el-option
             v-for="send in sendList"
             name="selectText"
             :key="send.id"
-            :value="send.id"
+            :value="send.text"
           >{{ send.text }}</el-option>
         </el-select>
       </tr>
@@ -113,22 +111,13 @@ export default {
         }
       ],
       docName: [
-        { text: "调查5" },
-        { text: "调查7" },
-        { text: "调查8" },
-        { text: "调查12" },
-        { text: "调查14" },
-        { text: "调查24" },
-        { text: "调查36" }
-      ],
-      heroAnswer: [
-        { hero: "" },
-        { hero: "" },
-        { hero: "" },
-        { hero: "" },
-        { hero: "" },
-        { hero: "" },
-        { hero: "" }
+        { text: "调查5", hero: "" },
+        { text: "调查7", hero: "" },
+        { text: "调查8", hero: "" },
+        { text: "调查12", hero: "" },
+        { text: "调查14", hero: "" },
+        { text: "调查24", hero: "" },
+        { text: "调查36", hero: "" }
       ],
       getHero: "",
       getTimeline: "",
@@ -146,9 +135,9 @@ export default {
     },
     // 尝试发送答案
     sendMessage: function() {
-      SendAnwser(this.heroAnswer, this.timelineAnwser).then(res => {
+      SendAnwser(this.docName, this.timelineAnwser).then(res => {
         this.getHero = res.data.hero;
-        this.getTimeline = res.data.timeline
+        //this.getTimeline = res.data.timeline
       });
     },
   },
