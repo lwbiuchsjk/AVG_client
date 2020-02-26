@@ -26,7 +26,7 @@
             v-for="send in sendList"
             name="selectText"
             :key="send.id"
-            :value="send.id"
+            :value="send.text"
           >{{ send.text }}</el-option>
         </el-select>
       </tr>
@@ -113,13 +113,13 @@ export default {
         }
       ],
       docName: [
-        { text: "调查5" },
-        { text: "调查7" },
-        { text: "调查8" },
-        { text: "调查12" },
-        { text: "调查14" },
-        { text: "调查24" },
-        { text: "调查36" }
+        { text: "调查5", id: 5 },
+        { text: "调查7", id: 7 },
+        { text: "调查8", id: 8 },
+        { text: "调查12", id: 12 },
+        { text: "调查14", id: 14 },
+        { text: "调查24", id: 24 },
+        { text: "调查36", id: 36 }
       ],
       heroAnswer: [
         { hero: "" },
