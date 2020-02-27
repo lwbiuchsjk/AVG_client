@@ -2,34 +2,10 @@
 <template>
   <div class="container">
     <div class="drama">{{ DramaContent }}</div>
-    <div class="options">
-      <div
-        class="option"
-        v-for="op in options"
-        v-bind:key="op.data"
-        v-bind:data-index="op.data"
-        @click="next"
-      >{{ op.text }}</div>
-    </div>
-    <div class="input">
-      <p>{{input}}</p>
-      <input button v-model="input" />
-    </div>
-    <div class="select">
-      <select select="1" v-model="selectText">
-        <option disabled value>请选择对象</option>
-        <option
-          v-for="send in sendList"
-          name="selectText"
-          :key="send.id"
-          :value="send.text"
-        >{{ send.text }}</option>
-      </select>
-    </div>
     <div id="hero_Answer" v-for="(doc_item, index) in docName" :key="index">
       <tr style="text-align:center">
-        <span style="width:900px;float:left;text-align:right">{{doc_item.text}}</span>
-        <el-select select="1" v-model="docName[index].hero" style="width:100px;float:left">
+        <span>{{doc_item.text}}</span>
+        <el-select select="1" v-model="docName[index].hero">
           <el-option disabled value>请选择对象</el-option>
           <el-option
             v-for="send in sendList"
@@ -66,6 +42,9 @@
     </div>
     <div id="timeline_Answer">
       <span>{{ getTimeline }}</span>
+    </div>
+    <div id="timeline_Answer">
+      <span>{{ fileName }}</span>
     </div>
   </div>
 </template>
@@ -136,7 +115,8 @@ export default {
       ],
       getHero: "",
       getTimeline: "",
-      timelineAnswer: ["", "", "", "", "", "", ""]
+      timelineAnswer: ["", "", "", "", "", "", ""],
+      fileName: ""
     };
   },
   // 在本页面中所有要用到的方法
@@ -153,6 +133,11 @@ export default {
       SendAnswer(this.docName, this.timelineAnswer).then(res => {
         this.getHero = res.data.hero;
         this.getTimeline = res.data.timeline;
+        this.fileName = res.data.fileName
+        if (this.fileName != "" && this.fileName != undefined) {
+          let server_path = process.env.VUE_APP_API.replace('/api/', '/') + this.fileName
+          window.open(server_path)
+        }
         //this.getTimeline = res.data.timeline
       });
     }

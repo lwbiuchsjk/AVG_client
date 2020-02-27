@@ -49,3 +49,19 @@ export function SendAnswer (hero, timeline) {
     }
   })
 }
+
+export function DownloadFile (file) {
+  return request({
+    url: '/download-file',
+    method: 'get',
+    responseType: 'blob'
+  }).then(({data}) => {
+    const downloadUrl = window.URL.createObjectURL(new Blob([data]))
+    const link = document.createElement('a')
+    link.href = downloadUrl
+    link.setAttribute('download', file)
+    document.body.appendChild(link)
+    link.click();
+    link.remove();
+  })
+}
