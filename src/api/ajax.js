@@ -37,11 +37,11 @@ export function GetNextMove (index) {
  * 将选择的答案发送给服务器
  *
  * @export
- * @param {*} anwser 发送的答案
+ * @param {*} Answer 发送的答案
  */
-export function SendAnwser (hero, timeline) {
+export function SendAnswer (hero, timeline) {
   return request({
-    url: '/get-anwser',
+    url: '/get-Answer',
     method: 'get',
     params: {
       hero: hero,
