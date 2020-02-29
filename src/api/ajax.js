@@ -50,9 +50,9 @@ export function SendAnswer (hero, timeline) {
   })
 }
 
-export function DownloadFile (file) {
+export function GameBegin (file) {
   return request({
-    url: '/download-file',
+    url: '/game-begin',
     method: 'get',
     responseType: 'blob'
   }).then(({data}) => {
